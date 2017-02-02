@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<style>
+		html, body {
+			width: 90%;
+			height: 90%;
+		}
+		#canvas-div {
+			width:95%;
+			height: 95%;
+		}
+	</style>
+</head>
+<body>
+	<div>x:<input type="text" id="x" />y:<input type="text" id="y" /></div>
+	<div><a href="javascript:getXY();">Generate new maze</a></div>
+	<div id='canvas-div'>
+		<canvas id="canvas">
+			Your browser does not support HTML5 Canvas.
+		</canvas>
+		<script src="maze.js"></script>
+		<script src="paintCanvas.js"></script>
+		<script src="keyListener.js"></script>
+		<script>init();</script>
+	</div>
+</body>
+</html>
