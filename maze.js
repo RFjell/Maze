@@ -11,18 +11,29 @@ var playerPosition;
 
 function init() {
 	canvas = document.getElementById("canvas");
+	ctx = canvas.getContext("2d");
+	gameOver = false;
+	createMaze();
+	playerPosition = [ random(width), random(height) ];
+	finishPoint = [ random(width), random(height) ];
+	resize_canvas();
+}
+
+function random( num ) {
+	return Math.floor( Math.random()*num );
+}
+
+function resize_canvas(){
+	canvas = document.getElementById("canvas");
 	canvas.width = document.getElementById("canvas-div").clientWidth - 20;
 	canvas.height = document.getElementById("canvas-div").clientHeight - 20;
 	cellSize = Math.floor(Math.min(canvas.height /height, canvas.width / width));
 	buffert = cellSize;
-	gameOver = false;
 	canvas.width += buffert*2;
 	canvas.height += buffert*2;
-	ctx = canvas.getContext("2d");
-	createMaze();
-	playerPosition = [Math.floor(Math.random()*width),Math.floor(Math.random()*height)];
-	finishPoint = [Math.floor(Math.random()*width),Math.floor(Math.random()*height)];
-	return setInterval(draw, 10);
+	drawMaze();
+	drawFinishLine();
+	drawPlayer();
 }
 
 function getXY() {
@@ -60,7 +71,7 @@ function depthFirstSearch(x,y) {
 		if( unvisited.length == 0 )
 			return;
 
-		let rand = Math.floor( Math.random() * unvisited.length );
+		let rand = random( unvisited.length );
 
 		let x_ = unvisited[rand][0];
 		let y_ = unvisited[rand][1];

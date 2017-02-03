@@ -1,5 +1,6 @@
-function clear() {
-	ctx.clearRect(0,0, canvas.width, canvas.height);
+function clearPlayer() {
+	ctx.clearRect( buffert + playerPosition[0]*cellSize - cellSize/2 + 1,
+					buffert + playerPosition[1]*cellSize - cellSize/2 +1, cellSize-2, cellSize-2);
 }
 
 function drawRect(x,y,w,h) {
@@ -30,9 +31,9 @@ function drawPlayer() {
 	ctx.lineTo(bx + 2*w, by + h-h/4);
 	ctx.stroke();
 	//Legs
-	ctx.moveTo(bx + w, by + h);
+	ctx.moveTo(bx + w, by + h - 2);
 	ctx.lineTo(bx + 2*w, by + h-h/4);
-	ctx.lineTo(bx + 3*w, by + h);
+	ctx.lineTo(bx + 3*w, by + h - 2);
 	ctx.stroke();
 	ctx.stroke();
 	//Arms
@@ -44,7 +45,11 @@ function drawPlayer() {
 
 function drawFinishLine() {
 	ctx.fillStyle = "green";
-	drawRect(buffert + cellSize*finishPoint[0] - cellSize/3,buffert + cellSize*finishPoint[1] - cellSize/3,2*cellSize/3,2*cellSize/3);
+	if( cellSize/2 + 5 < cellSize - 10) {
+		drawRect(buffert + cellSize*finishPoint[0] - cellSize/2 + 5,buffert + cellSize*finishPoint[1] - cellSize/2 + 5,cellSize -10,cellSize -10);
+	} else {
+		drawRect(buffert + cellSize*finishPoint[0] - cellSize/2 + 1,buffert + cellSize*finishPoint[1] - cellSize/2 + 1,cellSize -2,cellSize -2);
+	}
 }
 
 function drawMaze() {
@@ -77,11 +82,5 @@ function drawWinMessage() {
 }
 
 function draw() {
-	clear();
-	drawMaze();
-	drawFinishLine();
 	drawPlayer();
-	if( gameOver ) {
-		drawWinMessage();
-	}
 }
