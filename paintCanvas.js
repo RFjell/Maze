@@ -37,10 +37,17 @@ function drawPlayer() {
 	ctx.stroke();
 	ctx.stroke();
 	//Arms
-	ctx.moveTo(bx + w, by + h/2);
-	ctx.lineTo(bx + 2*w, by + h/2-h/9);
-	ctx.lineTo(bx + 3*w, by + h/2);
-	ctx.stroke();
+	if( gameOver ) {
+		ctx.moveTo(bx + w, by + h/4);
+		ctx.lineTo(bx + 2*w, by + h/2-h/12);
+		ctx.lineTo(bx + 3*w, by + h/4);
+		ctx.stroke();
+	} else {
+		ctx.moveTo(bx + w, by + h/2);
+		ctx.lineTo(bx + 2*w, by + h/2-h/12);
+		ctx.lineTo(bx + 3*w, by + h/2);
+		ctx.stroke();
+	}
 }
 
 function drawFinishLine() {
