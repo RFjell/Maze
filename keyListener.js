@@ -3,6 +3,12 @@ function doKeyDown(e){
 		return;
 	}
 	clearPlayer();
+
+	// Prevent the arrow keys from scrolling the window
+	if( [38, 40, 37, 39].indexOf( e.keyCode ) ) {
+		e.preventDefault();
+	}
+
 	switch (e.keyCode) {
 		case 38:  /* Up arrow */
 			if( playerPosition[1] > 0 && (!grid[playerPosition[0]][playerPosition[1]-1].south || e.shiftKey) ) {
@@ -25,10 +31,13 @@ function doKeyDown(e){
 			}
 			break;
 	}
+
 	if( playerPosition[0] == finishPoint[0] && playerPosition[1] == finishPoint[1] ) {
 		gameOver = true;
 		drawWinMessage();
 	}
+
 	drawPlayer();
 }
+
 window.addEventListener('keydown',doKeyDown,true);
