@@ -5,7 +5,7 @@ function doKeyDown(e){
 	clearPlayer();
 
 	// Prevent the arrow keys from scrolling the window
-	if( [38, 40, 37, 39].indexOf( e.keyCode ) ) {
+	if( [38, 40, 37, 39].indexOf( e.keyCode ) > -1 ) {
 		e.preventDefault();
 	}
 
