@@ -16,9 +16,11 @@
 <body onresize="resize_canvas()">
 	<div>x:<input type="text" id="x" />y:<input type="text" id="y" /></div>
 	<div><a href="javascript:getXY();">Generate new maze</a></div>
-	<div id='canvas-div'>
-		<canvas id="canvas">
+	<div id='canvas-div' style="position:relative;">
+		<canvas id="canvas-maze" style="position:absolute;left:0;top:0;z-index:1">
 			Your browser does not support HTML5 Canvas.
+		</canvas>
+		<canvas id="canvas-player" style="position:absolute;left:0;top:0;z-index:2">
 		</canvas>
 		<script src="maze.js"></script>
 		<script src="paintCanvas.js"></script>

@@ -4,14 +4,18 @@ var cellSize = 15;
 var buffert = cellSize;
 var gameOver = true;
 var grid;
-var canvas;
+var canvasMaze;
+var canvasPlayer;
 var ctx;
+var ctxMaze;
 var finishPoint;
 var playerPosition;
 
 function init() {
-	canvas = document.getElementById("canvas");
-	ctx = canvas.getContext("2d");
+	canvasMaze = document.getElementById("canvas-maze");
+	canvasPlayer = document.getElementById("canvas-player");
+	ctxMaze = canvasMaze.getContext("2d");
+	ctx = canvasPlayer.getContext("2d");
 	gameOver = false;
 	createMaze();
 	playerPosition = [ random(width), random(height) ];
@@ -24,13 +28,18 @@ function random( num ) {
 }
 
 function resize_canvas(){
-	canvas = document.getElementById("canvas");
-	canvas.width = document.getElementById("canvas-div").clientWidth - 20;
-	canvas.height = document.getElementById("canvas-div").clientHeight - 20;
-	cellSize = Math.floor(Math.min(canvas.height /height, canvas.width / width));
+	canvasMaze = document.getElementById("canvas-maze");
+	canvasMaze.width = document.getElementById("canvas-div").clientWidth - 20;
+	canvasMaze.height = document.getElementById("canvas-div").clientHeight - 20;
+	canvasPlayer = document.getElementById("canvas-player");
+	canvasPlayer.width = document.getElementById("canvas-div").clientWidth - 20;
+	canvasPlayer.height = document.getElementById("canvas-div").clientHeight - 20;
+	cellSize = Math.floor(Math.min(canvasMaze.height /height, canvasMaze.width / width));
 	buffert = cellSize;
-	canvas.width += buffert*2;
-	canvas.height += buffert*2;
+	canvasMaze.width += buffert*2;
+	canvasMaze.height += buffert*2;
+	canvasPlayer.width += buffert*2;
+	canvasPlayer.height += buffert*2;
 	drawMaze();
 	drawFinishLine();
 	drawPlayer();

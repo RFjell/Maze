@@ -1,16 +1,16 @@
 function clearPlayer() {
-	ctx.clearRect( buffert + playerPosition[0]*cellSize - cellSize/2 + 1,
-					buffert + playerPosition[1]*cellSize - cellSize/2 +1, cellSize-2, cellSize-2);
+	ctx.clearRect( buffert + playerPosition[0]*cellSize - cellSize/2 ,
+					buffert + playerPosition[1]*cellSize - cellSize/2 , cellSize, cellSize);
 }
 
-function drawRect(x,y,w,h) {
+function drawRect(x,y,w,h,ctx) {
 	ctx.beginPath();
 	ctx.rect(x,y,w,h);
 	ctx.closePath();
 	ctx.fill();
 }
 
-function drawLine(x1,y1,x2,y2) {
+function drawLine(x1,y1,x2,y2,ctx) {
 	ctx.beginPath();
 	ctx.moveTo(x1,y1);
 	ctx.lineTo(x2,y2);
@@ -51,11 +51,11 @@ function drawPlayer() {
 }
 
 function drawFinishLine() {
-	ctx.fillStyle = "green";
+	ctxMaze.fillStyle = "green";
 	if( cellSize/2 + 5 < cellSize - 10) {
-		drawRect(buffert + cellSize*finishPoint[0] - cellSize/2 + 5,buffert + cellSize*finishPoint[1] - cellSize/2 + 5,cellSize -10,cellSize -10);
+		drawRect(buffert + cellSize*finishPoint[0] - cellSize/2 + 5,buffert + cellSize*finishPoint[1] - cellSize/2 + 5,cellSize -10,cellSize -10, ctxMaze);
 	} else {
-		drawRect(buffert + cellSize*finishPoint[0] - cellSize/2 + 1,buffert + cellSize*finishPoint[1] - cellSize/2 + 1,cellSize -2,cellSize -2);
+		drawRect(buffert + cellSize*finishPoint[0] - cellSize/2 + 1,buffert + cellSize*finishPoint[1] - cellSize/2 + 1,cellSize -2,cellSize -2, ctxMaze);
 	}
 }
 
@@ -65,27 +65,27 @@ function drawMaze() {
 			let c = grid[i][j];
 			if( j == 0 ) {
 				drawLine(	buffert - cellSize/2, buffert - cellSize/2, 
-									buffert + (grid.length-1) * cellSize + cellSize/2, buffert - cellSize/2);
+									buffert + (grid.length-1) * cellSize + cellSize/2, buffert - cellSize/2, ctxMaze);
 			}
 			if( i == grid.length - 1 ) {
 				drawLine(	buffert + i*cellSize + cellSize/2, buffert + j*cellSize + cellSize/2, 
-									buffert + i*cellSize + cellSize/2, buffert + j*cellSize - cellSize/2);
+									buffert + i*cellSize + cellSize/2, buffert + j*cellSize - cellSize/2, ctxMaze);
 			}
 			if( c.south ) {
 				drawLine(	buffert + i*cellSize - cellSize/2, buffert + j*cellSize + cellSize/2, 
-									buffert + i*cellSize + cellSize/2, buffert + j*cellSize + cellSize/2);
+									buffert + i*cellSize + cellSize/2, buffert + j*cellSize + cellSize/2, ctxMaze);
 			}
 			if( c.west ) {
 				drawLine(	buffert + i*cellSize - cellSize/2, buffert + j*cellSize + cellSize/2, 
-									buffert + i*cellSize - cellSize/2, buffert + j*cellSize - cellSize/2);
+									buffert + i*cellSize - cellSize/2, buffert + j*cellSize - cellSize/2, ctxMaze);
 			}
 		}
 	}
 }
 
 function drawWinMessage() {
-	ctx.font = "30px Arial";
-	ctx.fillText("Congrats",canvas.width/2 - 15,50);
+	ctxMaze.font = "30px Arial";
+	ctxMaze.fillText("Congrats",canvasMaze.width/2 - 15,50);
 }
 
 function draw() {
