@@ -10,6 +10,13 @@ function drawRect(x,y,w,h,ctx) {
 	ctx.fill();
 }
 
+function drawCircle(x,y,r,ctx) {
+	ctx.beginPath();
+	ctx.arc( x, y, r, 0, Math.PI*2);
+	ctx.closePath();
+	ctx.fill();
+}
+
 function drawLine(x1,y1,x2,y2,ctx) {
 	ctx.beginPath();
 	ctx.moveTo(x1,y1);
@@ -18,6 +25,7 @@ function drawLine(x1,y1,x2,y2,ctx) {
 }
 
 function drawPlayer() {
+	clearPlayer();
 	let w = cellSize / 4;
 	let h = cellSize;
 	let bx = buffert + playerPosition[0]*cellSize - cellSize/2;
@@ -78,6 +86,22 @@ function drawMaze() {
 			if( c.west ) {
 				drawLine(	buffert + i*cellSize - cellSize/2, buffert + j*cellSize + cellSize/2, 
 									buffert + i*cellSize - cellSize/2, buffert + j*cellSize - cellSize/2, ctxMaze);
+			}
+		}
+	}
+}
+
+function drawCorrectPath() {
+	ctx.fillStyle = "blue";
+	for(let i = 0; i < grid.length; i++){
+		for(let j = 0; j < grid[0].length; j++) {
+			let c = grid[i][j];
+			if(c.correctPath) {
+				if( cellSize/2 + 5 < cellSize - 10) {
+					drawCircle(buffert + cellSize*i, buffert + cellSize*j, cellSize/8, ctx);
+				} else {
+					drawCircle(buffert + cellSize*i, buffert + cellSize*j, cellSize/4, ctx);
+				}
 			}
 		}
 	}

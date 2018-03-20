@@ -16,6 +16,7 @@
 <body onresize="resize_canvas()">
 	<div>x:<input type="text" id="x" />y:<input type="text" id="y" /></div>
 	<div><a href="javascript:getXY();">Generate new maze</a></div>
+	<div><a href="javascript:startSolving();">Solve the maze</a></div>
 	<div id='canvas-div' style="position:relative;">
 		<canvas id="canvas-maze" style="position:absolute;left:0;top:0;z-index:1">
 			Your browser does not support HTML5 Canvas.
@@ -25,6 +26,7 @@
 		<script src="maze.js"></script>
 		<script src="paintCanvas.js"></script>
 		<script src="keyListener.js"></script>
+		<script src="solve.js"></script>
 		<script>init();</script>
 	</div>
 </body>

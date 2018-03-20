@@ -58,7 +58,7 @@ function createMaze() {
 	for(let i = 0; i < width; i++) {
 		grid[i] = new Array(height);
 		for(let j = 0; j < height; j++){
-			grid[i][j] = { west: true, south: true, visited: false };
+			grid[i][j] = { west: true, south: true, visited: false, correctPath: false };
 		}
 	}
 	depthFirstSearch(0,0);
